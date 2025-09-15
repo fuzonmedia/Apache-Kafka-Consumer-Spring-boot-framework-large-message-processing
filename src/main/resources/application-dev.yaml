@@ -1,0 +1,122 @@
+spring:
+  logging:
+   level:
+     net: 
+       ttddyy:
+         dsproxy:
+           listener: debug
+
+  db:
+    host: sqldb
+    port: 3306
+    database: tretaildb
+    user: root
+    pass: "@nhk%^g-hTTTjdSi"
+    show: true
+    format: true
+    comments: true
+
+  gcp:
+    credentials: /app/tretailb2b-bc7bdb32f362.json
+    project-id: tretailb2b-fuzonmedia
+    bucket-name: tretail-logs
+    log-folder-name: logs
+    product-image-bucket: tretail-products
+
+  integration:
+    system:
+      marketploace: "[{\"name\": \"store\",\"id\": 1},{\"name\": \"amazon\",\"id\": 2},{\"name\": \"flipkart\",\"id\": 3}]"
+      order_status: "[{\"status\": \"unassigned\",\"id\": 0, \"inventory_sub\": false, \"inventory_add\": false},{\"status\": \"ordered\",\"id\": 1, \"inventory_sub\": true, \"inventory_add\": false},{\"status\": \"processed\",\"id\": 2, \"inventory_sub\": true, \"inventory_add\": false},{\"status\": \"cancelled\",\"id\": 3, \"inventory_sub\": false, \"inventory_add\": true},{\"status\": \"returned\",\"id\": 4 , \"inventory_sub\": false, \"inventory_add\": true},{\"status\": \"completed\",\"id\": 10, \"inventory_sub\": true, \"inventory_add\": false},{\"status\": \"unshipped\",\"id\": 11, \"inventory_sub\": true, \"inventory_add\": false},{\"status\": \"pending\",\"id\": 12, \"inventory_sub\": false, \"inventory_add\": false},{\"status\": \"shipped\",\"id\": 13, \"inventory_sub\": true, \"inventory_add\": false}]"
+      is_inventory_downloaded: is_inventory_downloaded
+      running_with_inventory_upload: running_with_inventory_upload
+      AUTOMATE_JOBS: "[{\"name\":\"AMAZON_ORDER_SYNC\",\"url\":\"/jobs/amazon-order-sync\",\"key\":\"amazon_order_sync_automation\"},{\"name\":\"FLIPKART_ORDER_SYNC\",\"url\":\"/jobs/flipkart-order-sync\",\"key\":\"flipkart_order_sync_automation\"},{\"name\":\"AMAZON_FLIPKART_INVENTORY_SYNC\",\"url\":\"/jobs/amazon-flipkart-inventory-sync\",\"key\":\"amazon_flipkart_inventory_sync_automation\"}]"
+      AUTOMATE_JOB_HOST: "http://quartz-api:8085"
+      AUTOMATE_JOB_FREQUENCY: "[{\"level\":\"HIGH\", \"count\":\"30-*\", \"interval\": \"15\"},{\"level\":\"MEDIUM\", \"count\":\"11-29\", \"interval\": \"30\"},{\"level\":\"LOW\", \"count\":\"*-10\", \"interval\": \"60\"}]"
+      # CHECK_CLIENTS: "[1,2,3]"
+
+    flipkart:
+      system_id: 3
+      token_key : flipkart_access_token
+      refresh_token_key : flipkart_refresh_token
+      token_expire_in: flipkart_access_token_expire_in
+      active : flipkart_integration
+      verified : flipkart_verified
+      expired : flipkart_token_expired
+      order_last_sync_time: flipkart_order_last_sync_time
+      default_location_key : flipkart_default_inventory_location_id
+      token_url : https://api.flipkart.net/oauth-service/oauth/token
+      redirect_url : https://api.tretailb2b.com/api/flipkart-callback
+      api_url: https://api.flipkart.net/sellers
+      state: fuzon_initilize_flipkart
+      app_id: ###
+      app_secret: ###
+      ex_wait_time : 15 #in sec
+      general_wait_time : 10 #in sec
+      force_exit_time: 7000 #in sec
+      order_status: "[{\"status\": \"unassigned\",\"id\": 0,\"system_id\": null ,\"soft_cancel\": true},{\"status\": \"approved\",\"id\": 31,\"system_id\": 11,\"soft_cancel\": true},{\"status\": \"packing_in_progress\",\"id\": 32,\"system_id\": 2,\"soft_cancel\": true},{\"status\": \"packed\",\"id\": 33,\"system_id\": 2,\"soft_cancel\": true},{\"status\": \"form_failed\",\"id\": 34,\"system_id\": 2,\"soft_cancel\": true},{\"status\": \"ready_to_dispatch\",\"id\": 35,\"system_id\": 13,\"soft_cancel\": true},{\"status\": \"shipped\",\"id\": 36,\"system_id\": 2,\"soft_cancel\": false},{\"status\": \"delivered\",\"id\": 37,\"system_id\": 10,\"soft_cancel\": false},{\"status\": \"pickup_complete\",\"id\": 38,\"system_id\": 2,\"soft_cancel\": false},{\"status\": \"cancelled\",\"id\": 39,\"system_id\": 3,\"soft_cancel\": null}]"
+      status: "[{\"type\": \"preDispatch\",\"status\": [\"APPROVED\",\"PACKING_IN_PROGRESS\",\"PACKED\",\"FORM_FAILED\",\"READY_TO_DISPATCH\"]},{\"type\": \"postDispatch\",\"status\": [\"SHIPPED\",\"DELIVERED\"]},{\"type\": \"postDispatch\",\"status\": [\"PICKUP_COMPLETE\"]},{\"type\": \"cancelled\",\"status\": [\"CANCELLED\"]}]"
+      #status: "[{\"type\": \"preDispatch\",\"status\": [\"APPROVED\",\"PACKING_IN_PROGRESS\",\"PACKED\",\"FORM_FAILED\",\"READY_TO_DISPATCH\"]},{\"type\": \"postDispatch\",\"status\": [\"SHIPPED\",\"DELIVERED\"]},{\"type\": \"postDispatch\",\"status\": [\"PICKUP_COMPLETE\"]}]"
+      access_token_creation_fail: "{\"key\": \"flipkart_access_token_creation_fail\", \"hours\": 12,\"limit\": 5}"
+
+    amazon:
+      system_id: 2
+      token_key: sp_access_token
+      refresh_token_key: sp_refresh_token
+      token_expire_in: amazon_access_token_expire_in
+      active: amazon_integration
+      verified: amazon_verified
+      expired: amazon_sp_token_expired
+      order_last_sync_time: amazon_order_last_sync_time
+      #default_location_key: flipkart_default_inventory_location_id
+      token_url: https://api.amazon.com/auth/o2/token
+      orders_url: https://sellingpartnerapi-eu.amazon.com/orders/v0/orders
+      iam_access_keyID: ###
+      iam_access_secretKey: ###
+      iam_region: eu-west-1
+      marketplace_id: A21TJRUUN4KGV #for indian market
+      feed_api_url: https://sellingpartnerapi-eu.amazon.com
+      #redirect_url: https://api.tretailb2b.com/api/flipkart-callback
+      #api_url: https://api.flipkart.net/sellers
+      #state: fuzon_initilize_flipkart
+      client_id: ###
+      client_secret: ###
+      ex_wait_time: 10 #in sec
+      max_wait_time: 10 #in sec
+      general_wait_time: 10 #in sec
+      force_exit_time: 3000 #in sec
+      order_status: "[{\"status\": \"unassigned\",\"id\": 0,\"system_id\": null,\"soft_cancel\": true},{\"status\": \"pending\",\"id\": 11,\"system_id\": 11,\"soft_cancel\": true},{\"status\": \"unshipped\",\"id\": 12,\"system_id\": 11,\"soft_cancel\": true},{\"status\": \"partiallyshipped\",\"id\": 13,\"system_id\": 2,\"soft_cancel\": false},{\"status\": \"shipped\",\"id\": 14,\"system_id\": 13,\"soft_cancel\": false},{\"status\": \"canceled\",\"id\": 15,\"system_id\": 3,\"soft_cancel\": null},{\"status\": \"unfulfillable\",\"id\": 16,\"system_id\": 2,\"soft_cancel\": true},{\"status\": \"invoiceunconfirmed\",\"id\": 17,\"system_id\": 2,\"soft_cancel\": false},{\"status\": \"pendingavailability\",\"id\": 18,\"system_id\": 2,\"soft_cancel\": true}]"
+      access_token_creation_fail: "{\"key\": \"amazon_access_token_creation_fail\", \"hours\": 12,\"limit\": 5}"
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+
+  kafka:
+    producer:
+      bootstrap-servers: kafka:9092 #192.168.43.89:9092 #for local may change
+      #group-id: "nano_group_id"
+      #auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+    consumer:
+      bootstrap-servers: kafka:9092 #192.168.43.89:9092 #for local may change
+      group-id: "nano_group_id"
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        max:
+          poll:
+            interval:
+              ms: 28000000 #in mile sec
+
+#logging:
+#  level :
+#    org :
+#      hibernate :
+#        SQL: debug
+#        type :
+#          descriptor :
+#            sql: trace

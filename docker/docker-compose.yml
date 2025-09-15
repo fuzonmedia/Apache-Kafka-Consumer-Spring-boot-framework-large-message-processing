@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  #Java spring boot Consumer Service
+  kafkaconsumer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: fuzonmedia/kafkaconsumer
+    restart: unless-stopped
+    volumes:
+      - ./app/:/app
+    container_name: kafkaconsumer
+    networks:
+      - nginx-proxy
+    logging:
+            driver: "json-file"
+            options:
+                max-size: "10m"
+    deploy:
+        resources:
+            limits:
+              cpus: "0.25"
+              memory: 1.5G
+            reservations:
+              cpus: "0.10"
+              memory: 512M
+
+networks:
+  nginx-proxy:
+    external: true
+
+
+

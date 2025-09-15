@@ -1,0 +1,60 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+
+        <property name = "hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name = "hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <!-- Assume test is the database name (need to change for production) -->
+        
+        <!-- for local -->
+        <property name = "hibernate.connection.url">jdbc:mysql://sqldb:3306/tretaildb</property> 
+
+        <!-- for staging -->
+        <!-- <property name = "hibernate.connection.url">jdbc:mysql://mysql_db:3306/tretail_api_master</property> -->
+        
+        <!-- for production -->
+        <!-- <property name = "hibernate.connection.url">jdbc:mysql://mysql-db:3306/tretail_api_master</property> -->
+
+        <property name = "hibernate.connection.username">root</property>
+        
+        <!-- for local -->
+        <property name = "hibernate.connection.password">###</property>        
+        
+        <!-- for staging & production -->
+        <!-- <property name = "hibernate.connection.password">###</property> -->
+        
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+        <property name="use_sql_comments">true</property>
+        <property name="hibernate.jdbc.time_zone">Asia/Kolkata</property>
+        <property name="hibernate.jdbc.batch_size">500</property>
+
+        <!-- List of XML mapping files -->
+        <mapping class="com.consumer.store.model.Client"/>
+        <mapping class="com.consumer.store.model.Log"/>
+        <mapping class="com.consumer.store.model.Item"/>
+        <mapping class="com.consumer.store.model.Order"/>
+        <mapping class="com.consumer.store.model.Customer"/>
+        <mapping class="com.consumer.store.model.LineItem"/>
+        <mapping class="com.consumer.store.model.Product"/>
+        <mapping class="com.consumer.store.model.OrderTransaction"/>
+        <mapping class="com.consumer.store.model.Return"/>
+        <mapping class="com.consumer.store.model.Setting"/>
+        <mapping class="com.consumer.store.model.OrderTrack"/>
+        <mapping class="com.consumer.store.model.Category"/>
+        <mapping class="com.consumer.store.model.Country"/>
+        <mapping class="com.consumer.store.model.Brand"/>
+        <mapping class="com.consumer.store.model.Manufacturer"/>
+        <mapping class="com.consumer.store.model.WMSTransaction"/>
+        <mapping class="com.consumer.store.model.PickList"/>
+        <mapping class="com.consumer.store.model.PickListItem"/>
+        <mapping class="com.consumer.store.model.AmazonProductCache"/>
+        <mapping class="com.consumer.store.model.OrderCache"/>
+        <mapping class="com.consumer.store.model.Analytic"/>
+        <mapping class="com.consumer.store.model.Bookkeeping"/>
+        <mapping class="com.consumer.store.model.AdminLog"/>
+
+    </session-factory>
+</hibernate-configuration>
