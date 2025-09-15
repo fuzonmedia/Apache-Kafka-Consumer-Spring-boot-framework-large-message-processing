@@ -35,7 +35,12 @@ Copy the generated JAR file to the Docker app folder:
 
 Navigate to the docker/ folder and run:
 
-📺 Video Demonstration 
+---
+
+## 📺 Video Explanation
+[Watch on YouTube](https://www.youtube.com/watch?v=KzDPROi1BUM)  
+
+---
 
 ### 📌 Features
 - Spring Boot + Apache Kafka Consumer
