@@ -1,15 +1,44 @@
-# Fuzomedia Kafka Consumer
+# Spring Boot Kafka Consumer
 
-## Build and run this application
+A Spring Boot based **Apache Kafka Consumer** for large message processing.  
+Integrates with **Amazon Selling Partner API (SP-API)** and demonstrates scalable Kafka consumption, batch handling, and containerized deployment.
 
-1. Install amazon selling partner api java sdk jar file in your local maven repository by this command.
+---
 
-`mvn install:install-file -Dfile=[path to JAR file in "target" folder] -DgroupId=com.amazon.sellingpartnerapi -DartifactId=sellingpartnerapi-aa-java -Dversion=1.0 -Dpackaging=jar`
+## 🚀 Build and Run
 
-2. Run this command to build **app.jar** file.
-`./mvnw clean install -Dmaven.test.skip=true`
+### 1. Install Amazon Selling Partner API Java SDK
+First, install the SP-API JAR file into your local Maven repository:
 
-3. Copy the **app.jar** from target *folder* file to the *docker/app* folder.
+```bash
+mvn install:install-file \
+  -Dfile=[path to JAR file in "target" folder] \
+  -DgroupId=com.amazon.sellingpartnerapi \
+  -DartifactId=sellingpartnerapi-aa-java \
+  -Dversion=1.0 \
+  -Dpackaging=jar
 
-4. Finally run this command inside  *docker* folder to build the docker image and run it in a docker container.
-`docker-compose up`
+```
+### 2. Build the Application
+
+```bash
+./mvnw clean install -Dmaven.test.skip=true
+```
+
+This will generate an app.jar in the target folder.
+
+### 3. Prepare Docker
+
+Copy the generated JAR file to the Docker app folder:
+
+### 4. Run with Docker Compose
+
+Navigate to the docker/ folder and run:
+
+📺 Video Demonstration 
+
+### 📌 Features
+- Spring Boot + Apache Kafka Consumer
+- Handles large message processing
+- Amazon Selling Partner API integration
+- Packaged with Docker & Docker Compose
